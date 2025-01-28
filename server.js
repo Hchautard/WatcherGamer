@@ -30,13 +30,6 @@ app.post('/login', (req, res) => {
     res.json({ accessToken: accessToken });
 });
 
-app.use('/', router);
-
-// Route to register page
-router.get('/register', function(req, res) {
-    res.send('Register page');
-})
-
 const posts = [
     {
         username: "Kyle",

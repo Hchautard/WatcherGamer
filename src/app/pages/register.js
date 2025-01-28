@@ -1,6 +1,9 @@
-import Switch from "./components/switch";
+import Switch from "../components/switch";
+import Link from "next/link";
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const navigate = useNavigate();
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-background text-foreground">
       <main className="flex flex-col gap-8 row-start-2 items-center">
@@ -30,7 +33,9 @@ export default function Register() {
           <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded dark:bg-blue-600 dark:hover:bg-blue-800">
             Register
           </a>
-          <a className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded dark:bg-gray-600 dark:hover:bg-gray-800">
+          <a 
+            onClick={() => navigate('/')}
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded dark:bg-gray-600 dark:hover:bg-gray-800">
             Login
           </a>
         </div>
