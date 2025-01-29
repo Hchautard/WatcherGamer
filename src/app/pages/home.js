@@ -28,13 +28,6 @@ export default function Home() {
               placeholder="Password"
             />
           </div>
-
-          {/* Link Signup */}
-          <a
-            onClick={() => navigate('/register')}
-          >
-            Create an account
-          </a>
         </div>
 
         <div className="flex flex-row items-center gap-4 justify-center w-full">
@@ -44,7 +37,7 @@ export default function Home() {
             Connect
           </a>
           <a
-            href={"/register"}
+            onClick={() => navigate('/register')}
             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded dark:bg-gray-600 dark:hover:bg-gray-800"
           >
             Register

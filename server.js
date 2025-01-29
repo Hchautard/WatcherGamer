@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import userRoutes from "./routes/user-routes.js";
 const app = express();
 const router = express.Router();
 import jwt from "jsonwebtoken";
@@ -18,6 +19,11 @@ app.use(cors({
     credentials: true, // Si vous utilisez des cookies
 }));
 
+// Routes
+app.use('/user', userRoutes);
+
+
+// exemple de get avec middleware
 app.get('/posts', authenticateToken, (req, res) => {
     res.json(posts.filter(post => post.username === req.user.name));
 });
@@ -29,19 +35,6 @@ app.post('/login', (req, res) => {
     const accessToken = jwt.sign(user , process.env.ACCESS_TOKEN_SECRET);
     res.json({ accessToken: accessToken });
 });
-
-const posts = [
-    {
-        username: "Kyle",
-        title: "Post 1"
-    },
-    {
-        username: "Jim",
-        title: "Post 2"
-    }
-];
-
-
 
 app.listen(3001, () => {
     console.log("Server listening on port 3001");
