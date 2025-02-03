@@ -14,6 +14,15 @@ export default class FactoryDAO {
             user: 'root',
             password: '',
             database: 'watcher_gamer',
+            port: 3306
+        });
+        
+        this.db.connect((err) => {
+            if (err) {
+                console.error('error connecting: ' + err.stack);
+                return;
+            }
+            console.log('connected as id ' + this.db.threadId);
         });
     }
 

@@ -10,7 +10,8 @@ export class UserDbDao extends UserDao {
     async getUserById(id) {
         try {
             const result = await this.db.run(
-                `SELECT * FROM users WHERE id = ?`, [id]
+                `SELECT * FROM users WHERE id = ?`, 
+                [id]
             )
             return result;
         } catch (error) {
@@ -18,27 +19,28 @@ export class UserDbDao extends UserDao {
         }
     }
 
-    async getUserByUsername(username) {
-        console.log("dao:" + username + " " + this.db);
-        try {
-            const result = await this.db.run(
-                `SELECT * FROM users WHERE username = ?`, [username]
-            )
-            return result;
-        } catch (error) {
-            console.log(error);
-        }
+    getUserByUsername(username) {
+        return new Promise((resolve, reject) => {
+            this.db.query("SELECT * FROM user WHERE username = ?", [username], function (err, result) {
+                if (err) {
+                    reject(err); 
+                } else {
+                    resolve(result); 
+                }
+            });
+        });
     }
 
-    async createUser(user) {
-        try {
-            const result = await this.db.run(
-                `INSERT INTO users (username, password) VALUES (?)`, [user.username, user.password]
-            )
-            return result;
-        } catch (error) {
-            console.log(error);
-        }
+    createUser(user) {
+        return new Promise((resolve, reject) => {
+            this.db.query(`INSERT INTO user (username, password) VALUES (?, ?)`, [user.username, user.password], function (err, result) {
+                if (err) {
+                    reject(err); 
+                } else {
+                    resolve(result); 
+                }
+            });
+        });
     }
 
 }

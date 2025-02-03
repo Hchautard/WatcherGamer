@@ -4,32 +4,55 @@ import { useNavigate } from 'react-router-dom';
 export default function Register() {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.username.value);
-    // Fetch is an user is already registered
-    fetch(`http://localhost:3001/user/username/${e.target.username.value}`)
-      .then((res) => res.json())
-      .then((user) => {
-        if (user) {
-          alert("User already registered");
-        } else {
-          fetch("http://localhost:3001/user/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username: e.target.username.value,
-              password: e.target.password.value,
-            }),
-          })
-            .then((res) => res.json())
-            .then((user) => {
-              navigate("/");
-            });
-        }
+  const registerUser = async (username, password) => {
+    try {
+      const response = await fetch('http://localhost:3001/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       });
+
+      if (response.ok) {
+        const user = await response.json();
+        console.log("User created:", user);
+        // navigate('/login');
+      } else {
+        throw new Error(`Error creating user: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const username = e.target.username.value;
+      const response = await fetch(`http://localhost:3001/user/username/${username}`);
+
+      if (!response.ok) {
+          if (response.status === 404) {
+            
+            const password = e.target.password.value;
+            await registerUser(username, password);
+
+          } else {
+              throw new Error(`Error fetching user: ${response.statusText}`);
+          }
+      } else {
+          const existingUser = await response.json();
+          console.log("User already exists:", existingUser);
+          alert("This username is already taken. Please choose another one.");
+          return;
+      }
+
+    } catch (error) {
+        console.error("Error during user check:", error);
+        alert("An error occurred while checking the username. Please try again.");
+    }
   }
 
   return (
