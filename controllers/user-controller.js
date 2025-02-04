@@ -21,9 +21,16 @@ export const createUser = async (req, next) => {
 export const getUserById = async (req, next) => {
     try {
         const user = await factoryDAO.getUserDao().getUserById(req);
+        if (!user) {
+            throw new Error("User not found");
+        }
         return user;
     } catch (error) {
-        return error;
+        console.error("Error fetching user:", error);
+        if (next) {
+            return next(error);
+        }
+        return { error: error.message || "Failed to fetch user" };
     }
 }
 
@@ -37,8 +44,8 @@ export const getUserByUsername = async (req, next) => {
     } catch (error) {
         console.error("Error fetching user:", error);
         if (next) {
-            return next(error); // Passe l'erreur au middleware suivant si `next` est fourni
+            return next(error); 
         }
-        return { error: error.message || "Failed to fetch user" }; // Retourne un objet d'erreur lisible
+        return { error: error.message || "Failed to fetch user" };
     }
 };

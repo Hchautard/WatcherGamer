@@ -11,6 +11,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
     "@sequelize/mysql": "^7.0.0-alpha.44",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
