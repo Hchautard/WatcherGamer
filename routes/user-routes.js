@@ -1,5 +1,4 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 import * as UserController from '../controllers/user-controller.js';
 
 const router = express();

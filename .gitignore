@@ -42,3 +42,8 @@ next-env.d.ts
 
 # database
 data.db
+requests.rest
+
+# certificates https
+certificate.pem
+private-key.pem

@@ -1,6 +1,6 @@
 "use client";
 
-export default function Landing() {
+export default function Dashboard() {
     return (
         <div>
             <h1>Landing</h1>

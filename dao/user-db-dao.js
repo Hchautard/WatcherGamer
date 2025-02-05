@@ -43,4 +43,16 @@ export class UserDbDao extends UserDao {
         });
     }
 
+    setUserToken(req) {
+        return new Promise((resolve, reject) => {
+            this.db.query(`UPDATE user SET token = ? WHERE username = ?`, [req.token, req.username], function (err, result) {
+                if (err) {
+                    reject(err); 
+                } else {
+                    resolve(result); 
+                }
+            });
+        });
+    }
+
 }
