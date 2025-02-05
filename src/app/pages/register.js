@@ -6,7 +6,7 @@ export default function Register() {
 
   const registerUser = async (username, password) => {
     try {
-      const response = await fetch('http://localhost:3001/user', {
+      const response = await fetch('https://localhost:3001/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default function Register() {
 
     try {
       const username = e.target.username.value;
-      const response = await fetch(`http://localhost:3001/user/username/${username}`);
+      const response = await fetch(`https://localhost:3001/user/username/${username}`);
 
       if (!response.ok) {
           if (response.status === 404) {
