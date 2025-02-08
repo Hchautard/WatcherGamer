@@ -17,29 +17,15 @@ app.use(express.json());
 
 // Cors 
 app.use(cors({
-    origin: "http://localhost:3000", // Remplacez par l'URL de votre front-end
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Si vous utilisez des cookies
+    credentials: true, 
 }));
 
 // Routes
 
-app.get('/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
-
-
-// exemple de get avec middleware
-// app.get('/posts', authenticateToken, (req, res) => {
-//     res.json(posts.filter(post => post.username === req.user.name));
-// });
-
-// app.post('/login', (req, res) => {
-//     const username = req.body.username;
-//     const user = { name: username };
-
-//     const accessToken = jwt.sign(user , process.env.ACCESS_TOKEN_SECRET);
-//     res.json({ accessToken: accessToken });
-// });
 
 const options = {
     key: fs.readFileSync('private-key.pem'),

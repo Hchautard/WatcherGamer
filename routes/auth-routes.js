@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET);
     AuthController.setUserToken({ token, username });
 
-    return res.status(200).json({ token });
+    return res.status(200).json({ success: true, token: token });
 });
 
 export default router;
