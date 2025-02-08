@@ -24,6 +24,7 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
+        localStorage.setItem('username', username);
         localStorage.setItem('token', token);
         navigate('/dashboard');
       } else {
