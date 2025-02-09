@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Welcomer({ username }) { // Déstructure l'objet props
+export default function Welcomer({ username }) { 
 
     const welcomeSentences = [
         "Bonjour",
@@ -11,8 +11,6 @@ export default function Welcomer({ username }) { // Déstructure l'objet props
     const getRandomSentence = () => {
         return welcomeSentences[Math.floor(Math.random() * welcomeSentences.length)];
     };
-
-    console.log(username);
 
     return (
         <div>
