@@ -26,6 +26,7 @@ app.use(cors({
 
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
+app.use('/game', gameRoutes);
 
 const options = {
     key: fs.readFileSync('private-key.pem'),

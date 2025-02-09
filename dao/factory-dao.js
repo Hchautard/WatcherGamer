@@ -1,5 +1,6 @@
 import mysql from 'mysql';
 import { UserDbDao } from './user-db-dao.js';
+import { GameDbDao } from './game-db-dao.js';
 
 export default class FactoryDAO {
 
@@ -28,5 +29,9 @@ export default class FactoryDAO {
 
     getUserDao() {
         return new UserDbDao(this.db);
+    }
+
+    getGameDao() {
+        return new GameDbDao(this.db);
     }
 }
